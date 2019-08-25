@@ -1,0 +1,70 @@
+CREATE PROCEDURE [DodajNovuNabavku]
+( 
+@NazivMasine nvarchar(20),
+@DatumNabavke date,
+@SifraUvoznika nvarchar(10),
+@Cena nvarchar(10),
+@Kolicina nvarchar(10)
+)
+AS
+BEGIN
+Insert into Nabavka(NazivMasine, DatumNabavke, SifraUvoznika, Cena, Kolicina) values (@NazivMasine, @DatumNabavke, @SifraUvoznika, @Cena, @Kolicina)
+END
+GO
+
+CREATE PROCEDURE [DajSveNabavke]
+AS
+select * from Nabavka
+GO
+
+CREATE Procedure [DajNabavkuPoNazivuMasine]
+(
+@NazivMasine nvarchar (20)
+)
+as 
+select * from Nabavka where NazivMasine=@NazivMasine
+Go
+
+CREATE PROCEDURE [DajCenuNabavkePoNazivuMasine]
+(
+@NazivMasine nvarchar (20)
+)
+as
+select Cena from Nabavka where NazivMasine=@NazivMasine
+GO
+
+CREATE PROCEDURE [IzmeniNabavku](
+@stariNaziv nvarchar (20),
+@NazivMasine nvarchar (20),
+@SifraUvoznika nvarchar (10),
+@Kolicina nvarchar (10)
+)
+AS
+BEGIN
+Update Nabavka set NazivMasine=@NazivMasine, SifraUvoznika=@SifraUvoznika, Kolicina=@KOlicina where NazivMasine=@StariNaziv
+END
+GO
+
+CREATE PROCEDURE [ObrisiNabavku](
+@NazivMasine nvarchar(10))
+AS
+BEGIN
+Delete  from Nabavka where NazivMasine=@NazivMasine
+END
+GO
+
+create procedure [DajSifruUvoznikaPoNazivuMasine]
+( 
+@NazivMasine nvarchar (20)
+)
+as
+select Nabavka.SifraUvoznika from Nabavka where NazivMasine=@NazivMasine
+go
+
+create procedure [DajKolicinuPoNazivuMasine]
+( 
+@NazivMasine nvarchar (20)
+)
+as
+select Nabavka.Kolicina from Nabavka where NazivMasine=@NazivMasine
+go

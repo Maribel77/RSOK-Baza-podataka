@@ -1,0 +1,55 @@
+USE [UVOZ_2019]
+GO
+
+CREATE PROCEDURE [DajSveUvoznike]
+AS
+select * from Uvoznik
+GO
+
+CREATE PROCEDURE [DajUvoznikaPoNazivu]
+( 
+@ImeUvoznika nvarchar(20)
+)
+AS
+select * from Uvoznik where ImeUvoznika=@ImeUvoznika
+GO
+
+CREATE PROCEDURE [DajUvoznikaPoSifri]
+( 
+@IdUvoznika nvarchar(10)
+)
+AS
+select * from Uvoznik where IdUvoznika=@IdUvoznika
+GO
+
+CREATE PROCEDURE [DodajNovgUvoznika]
+( 
+@IdUvoznika char(10),
+@ImeUvoznika nvarchar(20)
+)
+AS
+BEGIN
+Insert into Uvoznik(IdUvoznika, ImeUvoznika) values (@IdUvoznika, @ImeUvoznika)
+END
+GO
+
+CREATE PROCEDURE [ObrisiUvoznika]
+(
+@IdUvoznika char(10)
+)
+AS
+BEGIN
+Delete from Uvoznik where IdUvoznika=@IdUvoznika
+END
+GO
+
+CREATE PROCEDURE [IzmeniUvoznika](
+@StariId char(10),
+@IdUvoznika char(10),
+@ImeUvoznika nvarchar(20)
+)
+AS
+BEGIN
+Update Uvoznik set IdUvoznika=@IdUvoznika, ImeUvoznika=@ImeUvoznika where IdUvoznika=@StariId
+END
+GO
